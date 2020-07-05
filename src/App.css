@@ -9,31 +9,170 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
+    animation: App-logo-spin infinite 20s linear;
   }
 }
 
-.App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+/* 미디어 쿼리 
+/*
+@media all and (orientation:portrait) { … }   세로 모드. 뷰포트의 높이가 너비에 비해 상대적으로 크면 실행
+@media all and (orientation:landscape) { … }  가로 모드. 뷰포트의 너비가 높이에 비해 상대적으로 크면 실행
+(device-width:360px)
+(device-height:480px)
+(min-device-width:360px) and (min-device-height:480px) 
+
+*/
+/*---------------시작 미디어 쿼리-------------------------------*/
+
+/* 휴대폰 사이즈 -------------------------------------------------*/
+/* 스크린 너비가 480px 이하 이면 실행  667기준 -> 617*/ 
+@media screen and (max-width:480px) {
+  .main-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 617px;
+    background-color: whitesmoke;
+    
+  }
+  .main-container >.App-header {
+   
+    flex-basis: 10%;
+  }
+  
+  .main-container>.sub-container {
+    flex-basis: 80%;
+    display: flex;
+    flex-direction: row;
+    font-size: calc(10px + 2vmin);
+  }
+  .sub-container >.App-aside {
+    display: none;
+
+  }
+  
+  .sub-container >.App-main {
+    color: black;
+    border: 1px solid gray;
+    flex-basis: 100%;
+    font-size: calc(10px + 2vmin);
+  }
+  
+  .main-container >.App-footer {
+    background-color: wheat;
+    color: black;
+    border: 1px solid gray;
+    flex-basis: 10%;
+    font-size: calc(10px + 2vmin);
+  }
+} 
+
+/* 타블릿 사이즈  -------------------------------------------------*/
+/* 스크린 너비가 481px 이상 이면 실행 */
+@media screen and (min-width:481px)  {
+  .main-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 1024px;
+    background-color: white;
+  }
+  .main-container >.App-header {
+    background-color: #282c34;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    border: 1px solid gray;
+    flex-basis: 10%;
+  }
+  
+  .main-container>.sub-container {
+    flex-basis: 80%;
+    display: flex;
+    flex-direction: row;
+    font-size: calc(10px + 2vmin);
+  }
+  .sub-container >.App-aside {
+    border: 1px solid gray;
+    color: black;
+    flex-basis: 20%;
+  }
+  
+  .sub-container >.App-main {
+    color: black;
+    border: 1px solid gray;
+    flex-basis: 80%;
+    font-size: calc(10px + 2vmin);
+  }
+  
+  .main-container >.App-footer {
+    background-color: yellowgreen;
+    color: black;
+    border: 1px solid gray;
+    flex-basis: 10%;
+    font-size: calc(10px + 2vmin);
+  }
+} 
+
+/* 컴퓨터 사이즈 -------------------------------------------------*/
+/* 사이즈가 적어도 1025이상 이면 실행 */ 
+@media screen and (min-width: 1025px) {
+  .main-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: pink;
+  }
+  .main-container >.App-header {
+    background-color: #282c34;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+    border: 1px solid gray;
+    flex-basis: 10%;
+  }
+  
+  .main-container>.sub-container {
+    flex-basis: 80%;
+    display: flex;
+    flex-direction: row;
+    font-size: calc(10px + 2vmin);
+  }
+  .sub-container >.App-aside {
+    flex-basis: 20%;
+    font-size: calc(10px + 2vmin);
+  }
+  
+  .sub-container >.App-main {
+    color: black;
+    border: 1px solid gray;
+    flex-basis: 80%;
+    font-size: calc(10px + 2vmin);
+  }
+  
+  .main-container >.App-footer {
+    background-color: yellowgreen;
+    color: black;
+    border: 1px solid gray;
+    flex-basis: 10%;
+    font-size: calc(10px + 2vmin);
+  }
+  
 }
+/*---------------end media query-------------------------------*/
 
 .App-link {
-  color: rgb(112, 76, 182);
+  color: #61dafb;
 }
 
-@keyframes App-logo-float {
-  0% {
-    transform: translateY(0);
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
   }
-  50% {
-    transform: translateY(10px)
-  }
-  100% {
-    transform: translateY(0px)
+  to {
+    transform: rotate(360deg);
   }
 }

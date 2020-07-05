@@ -1,0 +1,19 @@
+
+    .head-container{
+        
+        
+      
+    }
+    .head-container >.main {
+        background-color: #282c34;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: calc(12px + 2vmin);
+        color: white;
+        border: 1px solid gray;
+      
+      
+    }
+    
+
