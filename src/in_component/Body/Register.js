@@ -1,4 +1,4 @@
-import React,{Component, Fragment, useState} from 'react';
+import React,{Component, Fragment, useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   pageMove,
@@ -13,15 +13,35 @@ export function Register() {
   
   //var id='';
   //var signup = {id:'',name:'',pwd:'',pwd2:''};
+
+    
   var signup_id ='';
   var signup_name ='';
   var signup_pwd ='';
   var signup_pwd2 ='';
+  var test = {};
+  /* useEffect(()=>{
+    console.log('렌더링이 되었습니다.');
+    callApi()
+    .then(res => test = res );
+    
+  });
+
+ 
+
+   var callApi = async () => {
+    const res = await fetch('/');
+    const body = await res.json();
+    return body;
+  }  */
   
   return (
     <Fragment key="Register">
       <div className="main-container">
         <header className="main">
+         <p><input type="button" value="홈으로이동" name="btn-test"
+            onClick ={()=> console.log('test tttt')}></input></p>
+
           <p><input type="button" value="홈으로이동" name="btn-home"
             onClick={()=> dispatch(pageMove('home'))}></input></p>
           <p>계정을 생성해 주세요.</p>
