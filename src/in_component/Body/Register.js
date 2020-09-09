@@ -1,75 +1,154 @@
-import React,{Component, Fragment, useState, useEffect} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  pageMove,
-  signup,
-  _mode,
+import React, { Component, Fragment, useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { pageMove, _mode, _data } from "../../features/bodySlice";
+import { signup } from "../../features/Login/loginSlice";
+import { useForm } from "react-hook-form";
+import { makeStyles } from "@material-ui/core/styles";
+import Avatar from "@material-ui/core/Avatar";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
 
-} from '../../features/Login/loginSlice';
-
-import '../../css/Login.css';
-export function Register() {
+export function Register(props) {
   const dispatch = useDispatch();
-  
-  //var id='';
-  //var signup = {id:'',name:'',pwd:'',pwd2:''};
+  const { register, handleSubmit, errors } = useForm();
+  const [message, setMessage] = useState();
+  const { msg } = props;
 
-    
-  var signup_id ='';
-  var signup_name ='';
-  var signup_pwd ='';
-  var signup_pwd2 ='';
-  var test = {};
-  /* useEffect(()=>{
-    console.log('렌더링이 되었습니다.');
-    callApi()
-    .then(res => test = res );
-    
-  });
+  //react hook form
+  const registerSignup = (user) => {
+    if (user.pwd !== user.pwd2) {
+      setMessage("비밀 번호가 일치하지 않습니다.");
+    } else if (user.pwd === user.pwd2) {
+      setMessage("");
+      //redux execute
+      dispatch(
+        signup({
+          id: user.id,
+          name: user.name,
+          password: user.pwd,
+          password2: user.pwd2,
+        })
+      );
+      //redux sage userPost SignUP
+      dispatch({ type: "SIGN_UP" });
+    }
+  };
+  const box = { margin: "5px" };
+  const err = { fontSize: "12px", color: "red", margin: "0px" };
 
- 
+  //Material UI 시작
+  const useStyles = makeStyles((theme) => ({
+    paper: {
+      marginTop: theme.spacing(1),
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: "40ch", // Fix IE 11 issue.
+      marginTop: theme.spacing(1),
+    },
+    textField: {
+      width: "40ch", // Fix IE 11 issue.
+      margin: theme.spacing(1, 0, 2),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }));
+  const classes = useStyles();
 
-   var callApi = async () => {
-    const res = await fetch('/');
-    const body = await res.json();
-    return body;
-  }  */
-  
   return (
-    <Fragment key="Register">
-      <div className="main-container">
-        <header className="main">
-         <p><input type="button" value="홈으로이동" name="btn-test"
-            onClick ={()=> console.log('test tttt')}></input></p>
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography>
+          {message}
+          {msg ? (
+            msg
+          ) : (
+            <Typography component="h1" variant="h5">
+              계정을 생성해 주세요.
+            </Typography>
+          )}
+        </Typography>
+        <form
+          className={classes.form}
+          //noValidate
+          onSubmit={handleSubmit(registerSignup)}
+        >
+          <TextField
+            className={classes.textField}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="id"
+            label="아이디"
+            autoComplete="id"
+            autoFocus
+            inputRef={register({ required: true, maxLength: 20 })}
+          />
+          <TextField
+            className={classes.textField}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="name"
+            label="이름"
+            autoComplete="name"
+            autoFocus
+            inputRef={register({ required: true, maxLength: 20 })}
+          />
 
-          <p><input type="button" value="홈으로이동" name="btn-home"
-            onClick={()=> dispatch(pageMove('home'))}></input></p>
-          <p>계정을 생성해 주세요.</p>
-         
-            <p><input type="text" placeholder="ID" name="id" 
-              onChange={(e)=>{signup_id = e.target.value}}
-            ></input></p>
+          <TextField
+            className={classes.textField}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="pwd"
+            label="비밀번호"
+            type="password"
+            autoComplete="current-password"
+            inputRef={register({ required: true })}
+          />
+          <TextField
+            className={classes.textField}
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="pwd2"
+            label="비밀번호확인"
+            type="password"
+            autoComplete="password"
+            inputRef={register({ required: true })}
+          />
 
-            <p><input type="text" placeholder="name" name="name" 
-              onChange={(e)=>{signup_name = e.target.value}}
-            ></input></p>
-            <p><input type="text" placeholder="password" name="pwd" 
-              onChange={(e)=>{signup_pwd = e.target.value}}
-            ></input></p>
-            <p><input type="text" placeholder="confirm password" name="pwd2" 
-              onChange={(e)=>{signup_pwd2 = e.target.value}}
-            ></input></p>
-
-            <p><input type="submit" value="계정생성" name="btn-signup"
-              onClick={()=> dispatch(signup({
-                id: signup_id, name: signup_name ,password: signup_pwd, password2: signup_pwd2
-              }))}
-            ></input></p>   
-         
-      </header>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            계정생성
+          </Button>
+        </form>
       </div>
-      
-    </Fragment >
+    </Container>
   );
 }
-
