@@ -23,6 +23,7 @@ export const orderSlice = createSlice({
     paidFinish: [],
 
     orderListfromServer: [],
+    cookedListfromServer: [],
     paidListfromServer: [],
 
     seletedFoodType: { name: "", index: 0 },
@@ -55,6 +56,9 @@ export const orderSlice = createSlice({
     },
     getOrderListfromServer: (state, action) => {
       state.orderListfromServer = action.payload;
+    },
+    getCookedListfromServer: (state, action) => {
+      state.cookedListfromServer = action.payload;
     },
     getPaidListfromServer: (state, action) => {
       state.paidListfromServer = action.payload;
@@ -174,6 +178,7 @@ export const {
   SendCookedFinish,
   SendPaidFinish,
   getOrderListfromServer,
+  getCookedListfromServer,
   getPaidListfromServer,
   prevOrderCheck,
   setOrderCount,

@@ -207,9 +207,40 @@ export function* sendCookedFinish(target) {
     .then(function (response) {
       // handle success
       console.log(response.data[0]);
-      user = response;
+      //user = response;
+      axios
+        .get("/api/cooked/list")
+        .then(function (response) {
+          user = response;
+        })
+        .catch(function (error) {
+          // handle error
+          console.error(error);
+          user = error;
+        });
       //console.log(response.data[0]);
     })
+    .catch(function (error) {
+      // handle error
+      console.error(error);
+      user = error;
+    })
+    .then(function () {
+      // always executed
+      //console.log("axios exe : sendOrderFood");
+    });
+  return user;
+}
+//음식을 조리를 완료리스트 가져오는 함수 sendCookedFinish
+export function* getCookedList(target) {
+  let user = "";
+  yield axios
+    .get("/api/cooked/list")
+    .then(function (response) {
+      // handle success
+      user = response;
+    })
+
     .catch(function (error) {
       // handle error
       console.error(error);
@@ -246,6 +277,8 @@ export function* sendPaidFinish(target) {
     });
   return user;
 }
+
+
 
 //계산 완료된 내역 가져오는 함수 getPaidList
 export function* getPaidList() {

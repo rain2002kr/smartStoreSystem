@@ -9,6 +9,9 @@ import { FooterContainer } from "./in_component/Footer/FooterContainer.js";
 import soundfile from "./Audio/ring.mp3";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Paper } from "@material-ui/core";
+import { getCookedListfromServer } from "../src/features/Order/orderSlice";
+import * as api from "../src/lib/api"; //api lib에서 가져오기
+import store from "./app/store.js";
 
 export function App() {
   const dispatch = useDispatch();
@@ -19,6 +22,16 @@ export function App() {
     console.log(data);
     dispatch(setMessage(data));
     dispatch({ type: "GET_ORDER_LIST" });
+    async function getCookedList() {
+      const cookedPromise = api.getCookedList();
+      const cookedList = await cookedPromise;
+      if (cookedList.statusText === "OK") {
+        store.dispatch(getCookedListfromServer(cookedList.data));
+      } else {
+      }
+    }
+    getCookedList();
+
     audio.play();
   });
   /* socket.on("hello", function (msg) {

@@ -18,7 +18,7 @@ function* requsetOrderFoodToServer() {
     //전송타임 및 상태저장
     const copy = ComFC.updateOrderinTimeStamp();
     yield put(SendOrder_food(copy));
-    yield delay(100);
+    yield delay(500);
 
     //api call for server 오더 보내기
     const store = Store.getState();

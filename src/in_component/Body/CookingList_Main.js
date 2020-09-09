@@ -30,8 +30,7 @@ export function CookingList_Main(props) {
   //useEffect 함수
   useEffect(() => {
     console.log("useEffect--CookingList_Main------");
-
-    //socket.emit("init", { name: "on" });
+    socket.emit("init", { name: "on" });
   }, []);
 
   //메뉴설정

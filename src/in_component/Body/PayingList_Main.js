@@ -20,18 +20,25 @@ export function PayingList_Main() {
   const STATUS_PAYING = 2;
   const orderStore = useSelector(order_store);
   const orderListfromServer = orderStore.orderListfromServer;
+  const cookedListfromServer = orderStore.cookedListfromServer;
   let orderQuntity = 0;
 
-  let payingList = orderListfromServer.filter((req, index) => {
+  /* let payingList = orderListfromServer.filter((req, index) => {
     if (req.status === STATUS_PAYING) {
-      orderQuntity++; //음식조리대기 수량 증가
+      orderQuntity++; 
       return req;
     }
+  }); */
+
+  let payingList = cookedListfromServer.map((req) => {
+    orderQuntity++; //음식조리대기 수량 증가
+    return req;
   });
+
   //useEffect 함수
   useEffect(() => {
     console.log("useEffect---PayingList_Main-----");
-    //socket.emit("init", { name: "on" });
+    socket.emit("init", { name: "on" });
     //dispatch({ type: "GET_ORDER_LIST" });
   }, []);
 
