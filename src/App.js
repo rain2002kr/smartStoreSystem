@@ -21,22 +21,30 @@ export function App() {
     console.log("return message");
     console.log(data);
     dispatch(setMessage(data));
-    dispatch({ type: "GET_ORDER_LIST" });
-    async function getCookedList() {
-      const cookedPromise = api.getCookedList();
-      const cookedList = await cookedPromise;
-      if (cookedList.statusText === "OK") {
-        store.dispatch(getCookedListfromServer(cookedList.data));
-      } else {
-      }
-    }
-    getCookedList();
-
     audio.play();
   });
-  /* socket.on("hello", function (msg) {
-    console.log(msg);
-  }); */
+
+  // order
+  socket.on("order", (data) => {
+    console.log("order check");
+    console.log(data);
+    dispatch(setMessage(data));
+    audio.play();
+  });
+  // cooked
+  socket.on("cooked", (data) => {
+    console.log("cooked check");
+    console.log(data);
+    dispatch(setMessage(data));
+    audio.play();
+  });
+  // paid
+  socket.on("paid", (data) => {
+    console.log("paid check");
+    console.log(data);
+    dispatch(setMessage(data));
+    audio.play();
+  });
 
   const headComponent = <HeadContainer />;
   const asideComponent = <AsideContainer />;

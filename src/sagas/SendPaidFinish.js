@@ -15,7 +15,7 @@ function* PaidFinish() {
     //계산 완료
     const paidFinish = store.order.paidFinish;
     yield api.sendPaidFinish(paidFinish);
-    yield socket.emit("init", { name: "on" });
+    yield socket.emit("paid", { name: "paid finish at sendPaidFinish" });
   } catch (e) {
     console.error(e);
   }

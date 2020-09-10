@@ -8,36 +8,7 @@ function Api() {
   var user = store.getState();
   return user.login.singup;
 }
-//test functon
-/* export function* test(id) {
-  var user = store.getState();
-  //Redux store value check
-  console.log("api check");
-  console.log(user.login.singup);
-  var target = user.login.singup;
 
-  console.log(JSON.stringify(target));
-
-  //yield axios.post('/api/user/ssss',[{ "id" : "rain" },{ "pwd" : "123" }])
-  yield axios
-    .post("/api/user/ssss", [JSON.stringify(target)])
-    .then(function (response) {
-      // handle success
-      console.log(response.data[0]);
-      user = response;
-      //console.log(response.data[0]);
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-      user = error;
-    })
-    .then(function () {
-      // always executed
-      console.log("axios exe");
-    });
-  return user;
-} */
 //로그인 함수
 export function* loginUsers() {
   var user = store.getState();
@@ -206,7 +177,7 @@ export function* sendCookedFinish(target) {
     .post("/api/cooked/finish", [JSON.stringify(target)])
     .then(function (response) {
       // handle success
-      console.log(response.data[0]);
+      console.log(`AXIOS cookedfinish ${response.data[0]}`);
       //user = response;
       axios
         .get("/api/cooked/list")
@@ -238,6 +209,7 @@ export function* getCookedList(target) {
     .get("/api/cooked/list")
     .then(function (response) {
       // handle success
+      console.log(`AXIOS getCookedList ${response.data[0]}`);
       user = response;
     })
 
@@ -277,8 +249,6 @@ export function* sendPaidFinish(target) {
     });
   return user;
 }
-
-
 
 //계산 완료된 내역 가져오는 함수 getPaidList
 export function* getPaidList() {

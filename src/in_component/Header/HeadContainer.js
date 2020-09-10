@@ -173,8 +173,8 @@ export function HeadContainer() {
   const socket = GetSocketIO();
   let audio = new Audio(soundfile);
   const handleRequsetOrderFood = () => {
-    dispatch(setMessage(""));
-    socket.emit("init", { name: "on" });
+    /*  dispatch(setMessage(""));
+    socket.emit("init", { name: "on" }); */
   };
   //sound on
   function handleplaySound() {

@@ -29,7 +29,7 @@ function* requsetOrderFoodToServer() {
     if (orderInTime !== store.order.prevOrder)
       if (orderList.join() !== "") {
         //오더시간이 동일하면 전송하지 않습니다.
-        yield socket.emit("init", { name: "on" });
+        yield socket.emit("order", { name: "order finish at SendOrderFood" });
         console.log("주문성공");
         audio.play();
         yield put(prevOrderCheck(orderInTime));

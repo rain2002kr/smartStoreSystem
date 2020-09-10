@@ -5,6 +5,10 @@ import { getCookedListfromServer } from "../features/Order/orderSlice";
 
 import * as api from "../lib/api";
 import { GetSocketIO } from "../lib/ComFC.js";
+function cookedfinish(e) {
+  const socket = GetSocketIO(); //For Socket.IO
+  socket.emit("cooked", { name: "cooked finish at sendCookedFinish" });
+}
 
 function* CookedFinish() {
   try {
@@ -20,7 +24,8 @@ function* CookedFinish() {
       yield put(getCookedListfromServer(cookedlist.data));
     } else {
     }
-    yield socket.emit("init", { name: "on" });
+    yield socket.emit("cooked", { name: "cooked finish at sendCookedFinish" });
+    //yield cookedfinish();
   } catch (e) {
     console.error(e);
   }
