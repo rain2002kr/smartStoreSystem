@@ -17,12 +17,12 @@ export function App() {
   const dispatch = useDispatch();
   const socket = GetSocketIO();
   const audio = new Audio(soundfile);
-  socket.on("welcome", (data) => {
+  /*   socket.on("welcome", (data) => {
     console.log("return message");
     console.log(data);
     dispatch(setMessage(data));
     audio.play();
-  });
+  }); */
 
   // order
   socket.on("order", (data) => {
@@ -32,12 +32,12 @@ export function App() {
     audio.play();
   });
   // cooked
-  socket.on("cooked", (data) => {
+ /*  socket.on("cooked", (data) => {
     console.log("cooked check");
     console.log(data);
     dispatch(setMessage(data));
     audio.play();
-  });
+  }); */
   // paid
   socket.on("paid", (data) => {
     console.log("paid check");

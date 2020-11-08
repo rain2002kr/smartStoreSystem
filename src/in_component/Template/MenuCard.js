@@ -28,7 +28,8 @@ export function MenuCard(props) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const { type, image, dsc, index } = props;
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
     console.log(type);
     dispatch(setSeletedFoodList({ name: type, index: index }));
     dispatch(setViewMenu(type));

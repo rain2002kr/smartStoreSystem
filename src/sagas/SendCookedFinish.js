@@ -5,14 +5,26 @@ import { getCookedListfromServer } from "../features/Order/orderSlice";
 
 import * as api from "../lib/api";
 import { GetSocketIO } from "../lib/ComFC.js";
-function cookedfinish(e) {
+
+function cookedfinish() {
   const socket = GetSocketIO(); //For Socket.IO
   socket.emit("cooked", { name: "cooked finish at sendCookedFinish" });
+}
+function cookedfinishFeedback() {
+  //e.preventDefault();
+  const socket = GetSocketIO(); //For Socket.IO
+
+  socket.on("cooked", (data) => {
+    console.log("cooked check");
+    console.log(data);
+    //dispatch(setMessage(data));
+    //audio.play();
+  });
 }
 
 function* CookedFinish() {
   try {
-    const socket = GetSocketIO(); //For Socket.IO
+    // const socket = GetSocketIO(); //For Socket.IO
     //Get bodyStore
     console.log("orderFood~~~~~");
     const store = Store.getState();
@@ -24,8 +36,10 @@ function* CookedFinish() {
       yield put(getCookedListfromServer(cookedlist.data));
     } else {
     }
-    yield socket.emit("cooked", { name: "cooked finish at sendCookedFinish" });
-    //yield cookedfinish();
+    // yield socket.emit("cooked", { name: "cooked finish at sendCookedFinish" });
+    yield cookedfinish();
+    yield cookedfinishFeedback();
+    //yield
   } catch (e) {
     console.error(e);
   }

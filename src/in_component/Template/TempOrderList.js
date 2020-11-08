@@ -58,6 +58,7 @@ export function TempOrderList() {
   //유저핸들 및 유저함수
   const classes = useStyles();
   const handleRequsetOrderFood = (e) => {
+    e.preventDefault()
     dispatch({ type: "ORDER_FOOD_SERVER" });
   };
   const handleFoodListClear = () => {
@@ -68,6 +69,7 @@ export function TempOrderList() {
     dispatch(pageMove("FoodSelect_Menu"));
   };
   const handleMenuPopup = (e, target, index) => {
+    e.preventDefault()
     console.log("handleMenuPopup");
     console.log(target);
     console.log(index);

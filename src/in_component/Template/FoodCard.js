@@ -53,7 +53,8 @@ export function FoodCard(props) {
   const [order, setOrder] = useState({});
 
   const { _id, type, name, price, image, dsc, menuType, index } = props;
-  const handleClickOrderCount = () => {
+  const handleClickOrderCount = (e) => {
+    e.preventDefault();
     dispatch(setOrderCount(1));
     //setOrder(props);
     dispatch(

@@ -31,11 +31,13 @@ export function FoodSelect_Menu(props) {
   const menuList = { margin: "2px", height: "30px", width: "20%" };
   //유저핸들 및 유저함수
   const handleShoplist = (e) => {
+    e.preventDefault();
     dispatch({ type: "ORDER_FOOD" });
     dispatch(pageMove("OrderFood_Menu"));
   };
 
   const handleRequsetOrderFood = (e) => {
+    e.preventDefault();
     dispatch({ type: "ORDER_FOOD" });
     dispatch({ type: "ORDER_FOOD_SERVER" });
   };
